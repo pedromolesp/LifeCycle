@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaPlayer = null
+
         Log.i("LifeCycle", "OnStop")
 
     }
