@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LifeCycle</string>
+    <string name="cuenta_verificada">Cuenta verificada</string>
+    <string name="button_text">Hello World!</string>
 </resources>
