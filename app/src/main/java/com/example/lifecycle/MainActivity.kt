@@ -1,9 +1,11 @@
 package com.example.lifecycle
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,14 +16,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mediaPlayer = MediaPlayer.create(this, R.raw.ai_2)
-        mediaPlayer?.start()
+        findViewById<MaterialButton>(R.id.btn_check).setOnClickListener {
+            startActivity(Intent(this, DialogActivity::class.java))
+        }
         Log.i("LifeCycle", "OnCreate")
     }
 
     override fun onStart() {
         super.onStart()
-        mediaPlayer?.start()
+        mediaPlayer = MediaPlayer.create(this, R.raw.ai_2)
 
         Log.i("LifeCycle", "OnStart")
 
@@ -29,6 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        mediaPlayer?.seekTo(position)
+        mediaPlayer?.start()
+
         Log.i("LifeCycle", "OnResume")
 
     }
@@ -36,12 +42,17 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         mediaPlayer?.pause()
+        if (mediaPlayer != null)
+            position = mediaPlayer!!.currentPosition
         Log.i("LifeCycle", "OnPause")
 
     }
 
     override fun onStop() {
         super.onStop()
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
         Log.i("LifeCycle", "OnStop")
 
     }
