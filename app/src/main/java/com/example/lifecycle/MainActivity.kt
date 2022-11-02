@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        mediaPlayer.start()
+        mediaPlayer?.start()
 
         Log.i("LifeCycle", "OnStart")
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        mediaPlayer.pause()
+        mediaPlayer?.pause()
         Log.i("LifeCycle", "OnPause")
 
     }
